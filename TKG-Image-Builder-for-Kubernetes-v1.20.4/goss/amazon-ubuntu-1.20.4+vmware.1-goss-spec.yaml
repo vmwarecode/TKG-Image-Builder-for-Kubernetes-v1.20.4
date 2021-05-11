@@ -42,18 +42,6 @@ package:
   socat:
     installed: true
 service:
-  apt-daily:
-    enabled: false
-    running: false
-  apt-daily-upgrade:
-    enabled: false
-    running: false
-  apt-daily-upgrade.timer:
-    enabled: false
-    running: false
-  apt-daily.timer:
-    enabled: false
-    running: false
   auditd:
     enabled: true
     running: true
@@ -79,7 +67,7 @@ command:
   /opt/cni/bin/host-device 2>&1 | awk -F' ' '{print substr($4,2); }':
     exit-status: 0
     stdout:
-    - 0.8.7+vmware.3
+    - 0.8.7+vmware.5
     stderr: []
     timeout: 0
   containerd --version | awk -F' ' '{print substr($3,2); }':
