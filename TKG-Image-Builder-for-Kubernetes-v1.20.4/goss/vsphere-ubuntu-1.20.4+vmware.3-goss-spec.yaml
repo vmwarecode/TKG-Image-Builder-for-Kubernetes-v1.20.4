@@ -1,37 +1,51 @@
 package:
-  audit:
+  apt-transport-https:
     installed: true
-  ca-certificates:
+  auditd:
     installed: true
   chrony:
     installed: true
+  cloud-guest-utils:
+    installed: true
   cloud-init:
     installed: true
-  cloud-utils-growpart:
+  cloud-initramfs-copymods:
     installed: true
-  conntrack-tools:
+  cloud-initramfs-dyn-netconf:
+    installed: true
+  conntrack:
     installed: true
   curl:
     installed: true
   ebtables:
     installed: true
+  gnupg:
+    installed: true
   jq:
     installed: true
-  libseccomp:
+  libnetfilter-acct1:
+    installed: true
+  libnetfilter-cttimeout1:
+    installed: true
+  libnetfilter-log1:
+    installed: true
+  libseccomp2:
+    installed: true
+  linux-cloud-tools-virtual:
+    installed: true
+  linux-tools-virtual:
     installed: true
   ntp:
     installed: false
   open-vm-tools:
     installed: true
-  python-netifaces:
+  python3-distutils:
     installed: true
-  python-requests:
+  python3-netifaces:
     installed: true
-  python2-pip:
+  python3-pip:
     installed: true
   socat:
-    installed: true
-  yum-utils:
     installed: true
 service:
   auditd:
@@ -56,7 +70,7 @@ command:
   /opt/cni/bin/host-device 2>&1 | awk -F' ' '{print substr($4,2); }':
     exit-status: 0
     stdout:
-    - 0.8.7+vmware.5
+    - 0.8.7+vmware.3
     stderr: []
     timeout: 0
   containerd --version | awk -F' ' '{print substr($3,2); }':
@@ -84,19 +98,19 @@ command:
   kubeadm version -o json | jq .clientVersion.gitVersion | tr -d '"' | awk '{print substr($1,2); }':
     exit-status: 0
     stdout:
-    - 1.20.4+vmware.1
+    - 1.20.4+vmware.3
     stderr: []
     timeout: 0
   kubectl version --short --client=true -o json | jq .clientVersion.gitVersion | tr -d '"' | awk '{print substr($1,2); }':
     exit-status: 0
     stdout:
-    - 1.20.4+vmware.1
+    - 1.20.4+vmware.3
     stderr: []
     timeout: 0
   kubelet --version | awk -F' ' '{print $2}'  | tr -d '"' | awk '{print substr($1,2); }':
     exit-status: 0
     stdout:
-    - 1.20.4+vmware.1
+    - 1.20.4+vmware.3
     stderr: []
     timeout: 0
 kernel-param:
@@ -105,6 +119,8 @@ kernel-param:
   net.bridge.bridge-nf-call-ip6tables:
     value: "1"
   net.bridge.bridge-nf-call-iptables:
+    value: "1"
+  net.ipv4.conf.all.rp_filter:
     value: "1"
   net.ipv4.ip_forward:
     value: "1"
